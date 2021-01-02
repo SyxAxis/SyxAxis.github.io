@@ -17,8 +17,8 @@
         
           &lt;p&gt;&lt;strong&gt;Arduino Bootloader - How-To (Re)Install the Aruduino Nano Bootloader&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;How to flash the Aruduino Nano bootloader and what to do if it doesn&#39;t work.&lt;/p&gt;
-&lt;p&gt;I obtained an Arduino Nano unit from someone the other day and decided to play with it but found it wouldn&#39;t take a sketch, it refused to accept the upload of sketch code. Turns out cheaper non-genunine Arduino boards are sometimes shipped without bootloaders. Sounds like a serious issue but not at all, the designers of the Arduino system thought about this.&lt;/p&gt;
 &lt;hr&gt;
+&lt;p&gt;I recently obtained an Arduino Nano unit from my Dad ( he&#39;s 82 and loves playing with gadgets and electronics! ) and decided to have a play with it but I found it wouldn&#39;t take a sketch, it refused to accept the upload of sketch code. Turns out cheaper non-genunine Arduino boards are sometimes shipped without bootloaders. Sounds like a serious issue but not at all, the designers of the Arduino system thought about this.&lt;/p&gt;
 &lt;h2 id=&#34;what-is-the-arduino-bootloader&#34;&gt;What is the Arduino bootloader?&lt;/h2&gt;
 &lt;p&gt;The Arduino bootloader is a small piece of code, as the name suggests, that allows the compiled sketch code to be installed and started. It&#39;s 512 bytes in size and sits in an area of &amp;quot;memory&amp;quot; within the 328P microprocessor chip.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://SyxAxis.github.io/arduino/ATmega328P_MemoryMap.jpg&#34; alt=&#34;Memory Map of the ATMega328 Microprocessor&#34;&gt;&lt;/p&gt;

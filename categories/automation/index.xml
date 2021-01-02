@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on SyxAxis</title>
-    <link>https://SyxAxis.github.io/post/</link>
-    <description>Recent content in Posts on SyxAxis</description>
+    <title>Automation on SyxAxis</title>
+    <link>https://SyxAxis.github.io/categories/automation/</link>
+    <description>Recent content in Automation on SyxAxis</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2021, George Johnson; all rights reserved.</copyright>
-    <lastBuildDate>Sat, 02 Jan 2021 16:05:26 +0000</lastBuildDate><atom:link href="https://SyxAxis.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Jan 2021 16:05:26 +0000</lastBuildDate><atom:link href="https://SyxAxis.github.io/categories/automation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go - EXIF Scanner and Extractor</title>
       <link>https://SyxAxis.github.io/post/golang_exif_scanner/</link>
@@ -79,78 +79,6 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/dsoprea/go-exif&#34;&gt;DSOpera go-exif library&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://regex.info/blog/lightroom-goodies&#34;&gt;Jeffrey Friedl Lightroom Plugins&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>Flashing Arduino Nano Bootloader from Arduino Uno</title>
-      <link>https://SyxAxis.github.io/post/arduino_bootloader/</link>
-      <pubDate>Sat, 02 Jan 2021 15:00:20 +0000</pubDate>
-      
-      <guid>https://SyxAxis.github.io/post/arduino_bootloader/</guid>
-      <description>
-        
-          &lt;p&gt;&lt;strong&gt;Arduino Bootloader - How-To (Re)Install the Aruduino Nano Bootloader&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;How to flash the Aruduino Nano bootloader and what to do if it doesn&#39;t work.&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;I recently obtained an Arduino Nano unit from my Dad ( he&#39;s 82 and loves playing with gadgets and electronics! ) and decided to have a play with it but I found it wouldn&#39;t take a sketch, it refused to accept the upload of sketch code. Turns out cheaper non-genunine Arduino boards are sometimes shipped without bootloaders. Sounds like a serious issue but not at all, the designers of the Arduino system thought about this.&lt;/p&gt;
-&lt;h2 id=&#34;what-is-the-arduino-bootloader&#34;&gt;What is the Arduino bootloader?&lt;/h2&gt;
-&lt;p&gt;The Arduino bootloader is a small piece of code, as the name suggests, that allows the compiled sketch code to be installed and started. It&#39;s 512 bytes in size and sits in an area of &amp;quot;memory&amp;quot; within the 328P microprocessor chip.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://SyxAxis.github.io/arduino/ATmega328P_MemoryMap.jpg&#34; alt=&#34;Memory Map of the ATMega328 Microprocessor&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Believe it or not, there&#39;s actually not a lot to an Arduino board and you can simply buy an ATmega328P microprocessor chip and flush a bootloader to it if you wish! The Arduino system is mainly about the supporting boards that hold the processor chips, the processor chips on the boards are, well, cheap as chips!&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;A special piece of code that is executed at every reset of the microcontroller and that looks for a sketch to be uploaded from the serial/USB port using a specific protocol and speed. If no connection is detected, the execution is passed to the code of your sketch. This little (usually 512 bytes) piece of code is called the &amp;quot;Bootloader&amp;quot; and it is in an area of the memory of the microcontroller - at the end of the address space - that can&#39;t be reprogrammed as a regular sketch and had been designed for such purpose.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;use-an-arduino-uno-to-reprogram-an-arduino-nano&#34;&gt;Use an Arduino Uno to ReProgram An Arduino Nano&lt;/h2&gt;
-&lt;p&gt;So you&#39;ll need the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Working Arduino Uno board&lt;/li&gt;
-&lt;li&gt;Arduino Nano board&lt;/li&gt;
-&lt;li&gt;Jumper wires with pins&lt;/li&gt;
-&lt;li&gt;10uF Capacitor ( must be 10uF )&lt;/li&gt;
-&lt;li&gt;Breadboard if you have one&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;First you need to do is to flash a specific sketch, supplied from within the standard Arduino IDE, to the Arduino Uno.&lt;/p&gt;
-&lt;p&gt;Plugin the Arduino Uno and from the Examples menu locate the &amp;quot;ArduinoISP&amp;quot; sketch, upload it to the Arduino Uno.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://SyxAxis.github.io/arduino/LoadFlashSketch.jpg&#34; alt=&#34;ArdiunoISP Base Sketch for flashing another Arduino&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Disconnect the Uno from the USB and wire it up as shown below. Note the use of the capacitor slotted into the line to GND.&lt;/p&gt;
-&lt;p&gt;Most boot flashing tutorials and diagrams will simply show the GND being wired up between the two board but note that if you attempt to flash the bootloader with just the lines you may find it will fail. The line is hot and when you go to flash the target board needs its reset line hit and dropped, if the line is simply hot the reset not happen and the reprogram will fail. The capacitor is put in line to drop the voltage and pull the line back up when the flash is started this triggers the Uno to Nano reset and the Nano will be open to accept the boot flash. It needs to be 10uF anthing bigger or smaller will take too long to pull the reset.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://SyxAxis.github.io/arduino/arduino_isp_wires.png&#34; alt=&#34;Wiring up the Uno and Nano for bootloader flash&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Once you have this wired up as shown the next step is to flip the Arduino IDE into a programmer using the Uno as the hardware programmer passing through to the Nano.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Plug the USB into the Arduino UNO board NOT the Nano, the Uno is a programmer and will instruct the Nano.&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;You need the board set to the target, the Nano.&lt;/li&gt;
-&lt;li&gt;You need the chip set to ATMega328P. ( pre 2018 this would be &amp;quot;old bootloader&amp;quot; )&lt;/li&gt;
-&lt;li&gt;Port is set to the Uno&#39;s USB link.&lt;/li&gt;
-&lt;li&gt;Select &amp;quot;Arduino as ISP&amp;quot; from the &lt;strong&gt;Programmer&lt;/strong&gt; options.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://SyxAxis.github.io/arduino/burn_bootloader_ide_settings.jpg&#34; alt=&#34;Arduino IDE Bootloader Burn Settings&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Finally hit &lt;strong&gt;Burn Bootloader&lt;/strong&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;what-happens-if-it-doesnt-work&#34;&gt;What Happens if it Doesn&#39;t Work?&lt;/h2&gt;
-&lt;p&gt;One issue I had with my Nano board was that it would not take the bootloader when I first tried and I kept getting failures. It took me 2 days to find the proble,.&lt;/p&gt;
-&lt;p&gt;If you see this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;avrdude: stk500_recv(): programmer is not responding
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;avrdude: stk500_getsync() attempt 1 of 10: not in sync: resp=0x03
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You may see this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;avrdude: Yikes!  Invalid device signature.
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;         Double check connections and try again, or use -F to override
-&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;         this check.
-&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;Error while burning bootloader.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I was also seeing random signatures from the Nano board!&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;Reading | ################################################## | 100% 0.05s
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;     avrdude: Device signature = 0x000000
-&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;     avrdude: Yikes!  Invalid device signature.
-&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;     Double check connections and try again, or use -F to override
-&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;     this check.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All these errors mean one thing, you have bad wiring! The lines between the boards must be good and you will need to ensure the cap in the GND line is good.&lt;/p&gt;
-&lt;p&gt;It turned out in my case that the VCC pin on my Nano board had a bad solder joint and it was joined to the pin next door to it. This meant the second it was flashed the VCC bled over and reset the board and kept producing random signatures. 5 secs with the soldering iron to clean up the bad solder joint and the flash worked perfect.&lt;/p&gt;
-&lt;h2 id=&#34;moral-of-the-story&#34;&gt;Moral of the Story&lt;/h2&gt;
-&lt;p&gt;Genuine Arduino boards will have a higher quality check from the factory but clones may not be subject to quite such high standards. You can get 5 Nano boards for £10 from Amazon, well worth buying the clone boards as they&#39;re far cheaper than the genuine boards, but just be sure that your ready to check them over and you&#39;re ready to dig deeper into the Arduino guts when things don&#39;t work out of the box.&lt;/p&gt;
         
       </description>
     </item>

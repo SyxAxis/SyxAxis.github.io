@@ -6,7 +6,83 @@
     <description>Recent content on SyxAxis</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2021, George Johnson; all rights reserved.</copyright>
-    <lastBuildDate>Sat, 02 Jan 2021 15:00:20 +0000</lastBuildDate><atom:link href="https://SyxAxis.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Jan 2021 16:05:26 +0000</lastBuildDate><atom:link href="https://SyxAxis.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go - EXIF Scanner and Extractor</title>
+      <link>https://SyxAxis.github.io/post/golang_exif_scanner/</link>
+      <pubDate>Sat, 02 Jan 2021 16:05:26 +0000</pubDate>
+      
+      <guid>https://SyxAxis.github.io/post/golang_exif_scanner/</guid>
+      <description>
+        
+          &lt;p&gt;&lt;strong&gt;Using Go to extract EXIF data from Image files&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Extracting EXIF from a single file is easy but suppose you have a huge folder tree with hundreds or thousands of images, what then? Then suppose you have a publishing deadline for a book. What you need is a super fast, efficient language to do the job for you. Golang is what you need!&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Have you ever wondered how when you take photos using your mobilephone and then upload them to your favourite website, how does it know so much about the phote image file? The secret is the EXIF data stored within the JPG images you capture and then upload. The EXIF data contains the most critical info needed about an image, the camera, the lens, the focal length, aperture size, time and date of the shot and even the GPS info. This is the most basic info, on top of that there are extensions for the IPTC info which has tons more info like keyword trees, descriptions, copyright, all valuable stuff you store and maintain using software like Adobe Lightroom.&lt;/p&gt;
+&lt;p&gt;When I worked on my first photo book for FotoVue I&#39;d shot and edited around 3,000 images files, from those we selected around 1,000 images to go into the book. The books FotoVue produce are for photographers and that means you need to have the key informaiton like location, camera, lens, focal length, aperture, ISO, all that good stuff and one place that&#39;s stored is in the EXIF of every image. When you edit all the info is kept and stored so it can be used to correctly catalogue your images.&lt;/p&gt;
+&lt;p&gt;Getting the EXIF from a single image is dead easy, right-click on it select Propeties ( Windows ) or &amp;quot;Get Info&amp;quot; ( Mac ), there it is. How the heck do you do that for 1,000+ images that are scattered through sub-folders? The London book I worked on had 12 chapters with 14 locations per chapter, that&#39;s around 200+ sub-folders. We needed the key critical EXIF data into something we could pass to the page designers, so we needed the filename plus the EXIF data, they would then copy and paste it into the 1,000 images in the book&#39;s layout.&lt;/p&gt;
+&lt;p&gt;We thought Lightroom could be used to get the info but despite it begin one of the best photo image organisers available it&#39;s useless at allowing you access to it&#39;s internal database, it demands you jump through some severley archais hoops using LUA, I&#39;ve no wish to learn a dead language from scratch just to get a CSV.&lt;/p&gt;
+&lt;h2 id=&#34;enter-the-gopher&#34;&gt;Enter the Gopher!&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://SyxAxis.github.io/images/golang_gopher_with_camera.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Luckily Go is a best damned language on the planet and I needed a simple Go project to get me started as I was learning Go.&lt;/p&gt;
+&lt;h2 id=&#34;go-exif-libary&#34;&gt;Go-Exif Libary&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dsoprea/go-exif&#34;&gt;DSOprea go-exif library&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We need a library that can extract EXIF data from any JPG file and hand it over in a simple text based format.&lt;/p&gt;
+&lt;p&gt;The examples supplied with the library are superb and ready to be built, so I stripped out the requied code and then built myself a file-folder scanner using the &lt;strong&gt;filewalk&lt;/strong&gt; function from the standard library. From that I was able to put together a suitable struct, read the info from file in a tree and dump the whole damned thing back out to a CSV file that could be loaded into any suitable spreadsheet app.&lt;/p&gt;
+&lt;p&gt;You can find the code for my EXIF scanner extractor here: &lt;a href=&#34;https://github.com/SyxAxis/GOEXIFExtractor&#34;&gt;GOExifExtractor on Github&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;the-goexifextractor-utility&#34;&gt;The GOExifExtractor Utility&lt;/h2&gt;
+&lt;p&gt;The reason for choosing Go was that I use Windows and Linux but others may use Mac, most togs will use Macs to manage photos and while it&#39;s a command line only util I needed a way to use it on any of the major platforms, Go can cross compile, so that&#39;s sorted.&lt;/p&gt;
+&lt;p&gt;The utility allows you to choose the fields you like to extract or simply all of them, filling in blanks where it can. The most common EXIF fields are shown below:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;constEXIFFields = []string{
+&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;		&amp;#34;ImageDescription&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;		&amp;#34;Make&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;		&amp;#34;Model&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;		&amp;#34;Software&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;		&amp;#34;DateTime&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;		&amp;#34;Artist&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;		&amp;#34;Copyright&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;		&amp;#34;ExposureTime&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;		&amp;#34;FNumber&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;		&amp;#34;ISOSpeedRatings&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;		&amp;#34;DateTimeOriginal&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;		&amp;#34;DateTimeDigitized&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;		&amp;#34;FocalLength&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;		&amp;#34;CameraOwnerName&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;		&amp;#34;BodySerialNumber&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;		&amp;#34;LensModel&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;		&amp;#34;GPSLatitudeRef&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;		&amp;#34;GPSLatitude&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;20&lt;/span&gt;		&amp;#34;GPSLongitudeRef&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;		&amp;#34;GPSLongitude&amp;#34;,
+&lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;	}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The folder scanned it really simple, nothing more than a simple JPG scanner. ( yeah hardcoded JPG only, it was my first Go project! )&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;err := filepath.Walk(filepathArg, func(path string, info os.FileInfo, err error) error {
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;		if filepath.Ext(path) == &amp;#34;.jpg&amp;#34; || filepath.Ext(path) == &amp;#34;.JPG&amp;#34; {
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;			files = append(files, path)
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;		}
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;		return nil
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;	})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;One thing that I did have problems with was how the raw EXIF data is stored from some attributes, the two problematic ones were &lt;strong&gt;Exposuretime&lt;/strong&gt; and &lt;strong&gt;Aperture&lt;/strong&gt; setting sometimes called the F-number, often expressed as &lt;strong&gt;f/16&lt;/strong&gt; for example.&lt;/p&gt;
+&lt;h4 id=&#34;exposure&#34;&gt;Exposure&lt;/h4&gt;
+&lt;p&gt;Exposure is stored in EXIF as an expression of a fraction of a second. Sub-second that is something like 1/128, which is 1/128th of a second. That&#39;s easy enough.  However anything longer than a second, long exposure images can be minutes, is stored as fraction 60/1, which is obviously 60 seconds. So that needed to be split and converted to decimal then have &amp;quot;sec&amp;quot; appended. Simple enough with a couple of floats.&lt;/p&gt;
+&lt;h4 id=&#34;aperature&#34;&gt;Aperature&lt;/h4&gt;
+&lt;p&gt;Aperature is expressed as a ratio of the the focal length and width of the aperture, so f/8 or f/16. There is no actual value on a lens of f/8 or f/16, they are simply ratios of the relationship between the settings of where the lens has been set and the aperture. Once again, we take the value from the EXIF and convert it from fractional to decimal then append &amp;quot;f/&amp;quot; to the result so that it makes sense when shown in the CSV.&lt;/p&gt;
+&lt;h4 id=&#34;go-exif-library&#34;&gt;Go-Exif Library&lt;/h4&gt;
+&lt;p&gt;The core function of the Go-Exif library is to be presented with an image file, it then extracts all the EXIF data a JSON based struct. We then cycle the info brought back from the image file in the struct and pull the EXIF field we actually asked for, converting those mentioned where required for the CSV output. The real magic is that the Go-Exif library is able to extract the data into a really easy to use data format where the fields are just sets of tagged data.&lt;/p&gt;
+&lt;h2 id=&#34;is-it-worth-the-effort&#34;&gt;Is it Worth The Effort?&lt;/h2&gt;
+&lt;p&gt;All I can say is that when FotoVue books are put together gathering the EXIF data and extracting it can take one person around a week to get all the info if they spend every day copy and pasting the info from Lightroom into Excel! That&#39;s a week of click and image, copy 8-10 pieces of text per image from Lightroom into row in Excel, then repeat around 1,000 times!! No fecking way! I didn&#39;t spend 30 years of my life in IT for nothing!&lt;/p&gt;
+&lt;p&gt;I use Lightroom along with Jeffrey Friedl&#39;s superb &amp;quot;Collection Publisher&amp;quot; plugin for Lightroom to extract and dump all the images in the correct folder structure on disk to match the collections from within Lightroom. Then I run my scanner over it and I can have a 1,000 JPG file&#39;s worth of data into a CSV in less than 2 mins! 2 mins versus 60 hours of manual copy&#39;n&#39;paste, f**k yeah it&#39;s worth it!&lt;/p&gt;
+&lt;p&gt;If the EXIF data is wrong or not quite right, then I don&#39;t have to spend hours and hours fixing a spreadsheet, I simply fix the odd entries, re-dump the images I need and then re-run the util, all of which can be done in a few minutes. This means the data can be off to the book editor and layout artists same day, it&#39;s easier to fix if there&#39;s problems so the turnaround is infinitely faster and it means me, the editor and layout artist have much more time to do the creative stuff we enjoy. All thanks to Go and a will to automate.&lt;/p&gt;
+&lt;p&gt;Links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SyxAxis/GOEXIFExtractor&#34;&gt;My GOExifExtractor on Github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dsoprea/go-exif&#34;&gt;DSOpera go-exif library&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://regex.info/blog/lightroom-goodies&#34;&gt;Jeffrey Friedl Lightroom Plugins&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+        
+      </description>
+    </item>
+    
     <item>
       <title>Flashing Arduino Nano Bootloader from Arduino Uno</title>
       <link>https://SyxAxis.github.io/post/arduino_bootloader/</link>
@@ -17,8 +93,8 @@
         
           &lt;p&gt;&lt;strong&gt;Arduino Bootloader - How-To (Re)Install the Aruduino Nano Bootloader&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;How to flash the Aruduino Nano bootloader and what to do if it doesn&#39;t work.&lt;/p&gt;
-&lt;p&gt;I obtained an Arduino Nano unit from someone the other day and decided to play with it but found it wouldn&#39;t take a sketch, it refused to accept the upload of sketch code. Turns out cheaper non-genunine Arduino boards are sometimes shipped without bootloaders. Sounds like a serious issue but not at all, the designers of the Arduino system thought about this.&lt;/p&gt;
 &lt;hr&gt;
+&lt;p&gt;I recently obtained an Arduino Nano unit from my Dad ( he&#39;s 82 and loves playing with gadgets and electronics! ) and decided to have a play with it but I found it wouldn&#39;t take a sketch, it refused to accept the upload of sketch code. Turns out cheaper non-genunine Arduino boards are sometimes shipped without bootloaders. Sounds like a serious issue but not at all, the designers of the Arduino system thought about this.&lt;/p&gt;
 &lt;h2 id=&#34;what-is-the-arduino-bootloader&#34;&gt;What is the Arduino bootloader?&lt;/h2&gt;
 &lt;p&gt;The Arduino bootloader is a small piece of code, as the name suggests, that allows the compiled sketch code to be installed and started. It&#39;s 512 bytes in size and sits in an area of &amp;quot;memory&amp;quot; within the 328P microprocessor chip.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://SyxAxis.github.io/arduino/ATmega328P_MemoryMap.jpg&#34; alt=&#34;Memory Map of the ATMega328 Microprocessor&#34;&gt;&lt;/p&gt;
