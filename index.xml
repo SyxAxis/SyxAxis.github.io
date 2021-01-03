@@ -6,13 +6,43 @@
     <description>Recent content on SyxAxis</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2021, George Johnson; all rights reserved.</copyright>
-    <lastBuildDate>Sat, 02 Jan 2021 16:05:26 +0000</lastBuildDate><atom:link href="https://SyxAxis.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Jan 2021 13:18:28 +0000</lastBuildDate><atom:link href="https://SyxAxis.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Powershell - Find All File and Folder Names with Non-ASCII Characters</title>
+      <link>https://SyxAxis.github.io/post/04_powershell_find_all_filenames_with_non_ascii/</link>
+      <pubDate>Sun, 03 Jan 2021 13:18:28 +0000</pubDate>
+      
+      <guid>https://SyxAxis.github.io/post/04_powershell_find_all_filenames_with_non_ascii/</guid>
+      <description>
+        
+          &lt;p&gt;&lt;strong&gt;Despite us being a UTF-8 world file and folder names with non-latin chars can still trip processes up.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I was digging through my MP3 collection, around 420,000 tracks ripped from a spareroom that&#39;s just filled to the brim with CDs, and I found that auto-naming had set the file and folder names with some odd characters that made it hard to rename and locate files. Names like &lt;strong&gt;Händel&lt;/strong&gt; are fine, no issue with those as I expect those but when you get something like this &lt;strong&gt;[ \The Mission\Godʼs Own Medicine ]&lt;/strong&gt; it doesn&#39;t look wrong but note the apostrophe is not a standard ASCII one but one from another part of the wonderful UTF-8 selection.&lt;/p&gt;
+&lt;p&gt;So how to trace them down quickly, Powershell is always my go-to scripting language on Windows, it is simply the Swiss Army Knife of Windows admin work tools, or Schweizermesser as they say in German speaking countries.&lt;/p&gt;
+&lt;p&gt;Scan up the folder structure and pull out the names that have chars that fall beyond the standard simple, original ASCII set.&lt;/p&gt;
+&lt;p&gt;Long version for scripting:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;Get-ChildItem -Path &amp;#34;M:\GWJ\MUSIC\&amp;#34; -Recurse | ForEach-Object {
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;    $currFile = $_
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;    if ( $currFile.Name -cmatch &amp;#34;[^\u0000-\u007F]&amp;#34; ) {
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;        $currFile.
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;        Write-Host &amp;#34;FOUND:[$($currFile.FullName)]&amp;#34;
+&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;    }
+&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This can be shortened to this if you need a single command verison:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;Get-ChildItem -Path &amp;#34;M:\GWJ\MUSIC\&amp;#34; -Recurse | Where-Object { $_.Name -cmatch &amp;#34;[^\u0000-\u007F]&amp;#34; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Alternative:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;Get-ChildItem -Path &amp;#34;M:\GWJ\MUSIC\&amp;#34; -Recurse | Where-Object { $_.Name -cmatch &amp;#34;[^\x20-\x7F]&amp;#34; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+        
+      </description>
+    </item>
+    
     <item>
       <title>Go - EXIF Scanner and Extractor</title>
-      <link>https://SyxAxis.github.io/post/golang_exif_scanner/</link>
+      <link>https://SyxAxis.github.io/post/02_golang_exif_scanner/</link>
       <pubDate>Sat, 02 Jan 2021 16:05:26 +0000</pubDate>
       
-      <guid>https://SyxAxis.github.io/post/golang_exif_scanner/</guid>
+      <guid>https://SyxAxis.github.io/post/02_golang_exif_scanner/</guid>
       <description>
         
           &lt;p&gt;&lt;strong&gt;Using Go to extract EXIF data from Image files&lt;/strong&gt;&lt;/p&gt;
@@ -85,10 +115,10 @@
     
     <item>
       <title>Flashing Arduino Nano Bootloader from Arduino Uno</title>
-      <link>https://SyxAxis.github.io/post/arduino_bootloader/</link>
+      <link>https://SyxAxis.github.io/post/01_arduino_bootloader/</link>
       <pubDate>Sat, 02 Jan 2021 15:00:20 +0000</pubDate>
       
-      <guid>https://SyxAxis.github.io/post/arduino_bootloader/</guid>
+      <guid>https://SyxAxis.github.io/post/01_arduino_bootloader/</guid>
       <description>
         
           &lt;p&gt;&lt;strong&gt;Arduino Bootloader - How-To (Re)Install the Aruduino Nano Bootloader&lt;/strong&gt;&lt;/p&gt;

@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="en" data-figures="" data-mode="lit">
+<html lang="en" data-figures="true" class="page" data-mode="lit">
   <head>
-<title>Automation | SyxAxis</title>
+<title>Go - EXIF Scanner and Extractor | SyxAxis</title>
 <meta charset="utf-8">
 <meta name="generator" content="Hugo 0.80.0" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -17,14 +17,14 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="">
+<meta name="description" content="Article description.">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@syxaxisphoto">
-<meta name="twitter:title" content="Automation" />
-<meta property="og:url" content="https://SyxAxis.github.io/categories/automation/" />
-<meta property="og:title" content="Automation" />
-<meta property="og:description" content="" />
-<meta property="og:image" content="https://SyxAxis.github.io/images/thumbnail.png" />
+<meta name="twitter:title" content="Go - EXIF Scanner and Extractor" />
+<meta property="og:url" content="https://SyxAxis.github.io/post/02_golang_exif_scanner/" />
+<meta property="og:title" content="Go - EXIF Scanner and Extractor" />
+<meta property="og:description" content="Article description." />
+<meta property="og:image" content="https://SyxAxis.github.io/images/path/share.png" />
 <link rel="apple-touch-icon" sizes="180x180" href='https://SyxAxis.github.io/icons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='https://SyxAxis.github.io/icons/favicon-32x32.png'>
 <link rel="manifest" href='https://SyxAxis.github.io/icons/site.webmanifest'>
@@ -32,8 +32,7 @@
 <meta name="msapplication-TileColor" content="#002538">
 <meta name="theme-color" content="#002538">
 
-<link rel="canonical" href="https://SyxAxis.github.io/categories/automation/">
-<link rel="alternate" type="application/rss+xml" href="https://SyxAxis.github.io/categories/automation/index.xml" title="SyxAxis" />
+<link rel="canonical" href="https://SyxAxis.github.io/post/02_golang_exif_scanner/">
 
     
 
@@ -50,8 +49,9 @@
   
   
     
+    
   
-  <body data-code="20" data-lines="false" id="documentTop">
+  <body data-code="10" data-lines="false" id="documentTop">
 
 <header class="nav_header" >
   <nav class="nav">
@@ -122,16 +122,10 @@
 </header>
 
     <main>
-
+  
 <div class="grid-inverse wrap content">
-  <ul class="posts" id="posts">
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://SyxAxis.github.io/post/02_golang_exif_scanner/">Go - EXIF Scanner and Extractor</a>
-      </h3>
-      <div class="post_meta">
+  <article class="post_content">
+    <h1 class="post_title">Go - EXIF Scanner and Extractor</h1><div class="post_meta">
   
     <svg class="icon">
   <use xlink:href="#calendar"></use>
@@ -148,30 +142,102 @@
       </a>
 </div>
 
-    </div>
-    <div class="excerpt_footer partition">
-      <div class="excerpt_thumbnail">
-        <img src='https://SyxAxis.github.io/projects/golang/golang_exif_title_pic.png'>
-      </div>
+    
+  <div class="post_share">
+    Share on:
+    <a href="https://twitter.com/intent/tweet?text=Go%20-%20EXIF%20Scanner%20and%20Extractor&url=https%3a%2f%2fSyxAxis.github.io%2fpost%2f02_golang_exif_scanner%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+      <svg class="icon">
+  <use xlink:href="#twitter"></use>
+</svg>
+    </a>
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fSyxAxis.github.io%2fpost%2f02_golang_exif_scanner%2f&t=Go%20-%20EXIF%20Scanner%20and%20Extractor" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+      <svg class="icon">
+  <use xlink:href="#facebook"></use>
+</svg>
+    </a>
+    <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="Share on LinkedIn" rel="nofollow">
+      <svg class="icon">
+  <use xlink:href="#linkedin"></use>
+</svg>
+    </a>
+    <a href="https://SyxAxis.github.io/post/02_golang_exif_scanner/" title="Copy Link" class="link link_yank">
+      <svg class="icon">
+  <use xlink:href="#copy"></use>
+</svg>
+    </a>
+  </div>
+
+    
+    <img src="/projects/golang/golang_exif_title_pic.png" class="image_featured">
+    
+    <p><strong>Using Go to extract EXIF data from Image files</strong></p>
+<p>Extracting EXIF from a single file is easy but suppose you have a huge folder tree with hundreds or thousands of images, what then? Then suppose you have a publishing deadline for a book. What you need is a super fast, efficient language to do the job for you. Golang is what you need!</p>
+<hr>
+<p>Have you ever wondered how when you take photos using your mobilephone and then upload them to your favourite website, how does it know so much about the phote image file? The secret is the EXIF data stored within the JPG images you capture and then upload. The EXIF data contains the most critical info needed about an image, the camera, the lens, the focal length, aperture size, time and date of the shot and even the GPS info. This is the most basic info, on top of that there are extensions for the IPTC info which has tons more info like keyword trees, descriptions, copyright, all valuable stuff you store and maintain using software like Adobe Lightroom.</p>
+<p>When I worked on my first photo book for FotoVue I'd shot and edited around 3,000 images files, from those we selected around 1,000 images to go into the book. The books FotoVue produce are for photographers and that means you need to have the key informaiton like location, camera, lens, focal length, aperture, ISO, all that good stuff and one place that's stored is in the EXIF of every image. When you edit all the info is kept and stored so it can be used to correctly catalogue your images.</p>
+<p>Getting the EXIF from a single image is dead easy, right-click on it select Propeties ( Windows ) or &quot;Get Info&quot; ( Mac ), there it is. How the heck do you do that for 1,000+ images that are scattered through sub-folders? The London book I worked on had 12 chapters with 14 locations per chapter, that's around 200+ sub-folders. We needed the key critical EXIF data into something we could pass to the page designers, so we needed the filename plus the EXIF data, they would then copy and paste it into the 1,000 images in the book's layout.</p>
+<p>We thought Lightroom could be used to get the info but despite it begin one of the best photo image organisers available it's useless at allowing you access to it's internal database, it demands you jump through some severley archais hoops using LUA, I've no wish to learn a dead language from scratch just to get a CSV.</p>
+<h2 id="enter-the-gopher">Enter the Gopher!</h2>
+<p><img src="/images/golang_gopher_with_camera.png" alt=""></p>
+<p>Luckily Go is a best damned language on the planet and I needed a simple Go project to get me started as I was learning Go.</p>
+<h2 id="go-exif-libary">Go-Exif Libary</h2>
+<p><a href="https://github.com/dsoprea/go-exif">DSOprea go-exif library</a></p>
+<p>We need a library that can extract EXIF data from any JPG file and hand it over in a simple text based format.</p>
+<p>The examples supplied with the library are superb and ready to be built, so I stripped out the requied code and then built myself a file-folder scanner using the <strong>filewalk</strong> function from the standard library. From that I was able to put together a suitable struct, read the info from file in a tree and dump the whole damned thing back out to a CSV file that could be loaded into any suitable spreadsheet app.</p>
+<p>You can find the code for my EXIF scanner extractor here: <a href="https://github.com/SyxAxis/GOEXIFExtractor">GOExifExtractor on Github</a></p>
+<h2 id="the-goexifextractor-utility">The GOExifExtractor Utility</h2>
+<p>The reason for choosing Go was that I use Windows and Linux but others may use Mac, most togs will use Macs to manage photos and while it's a command line only util I needed a way to use it on any of the major platforms, Go can cross compile, so that's sorted.</p>
+<p>The utility allows you to choose the fields you like to extract or simply all of them, filling in blanks where it can. The most common EXIF fields are shown below:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>constEXIFFields = []string{
+<span class="ln"> 2</span>		&#34;ImageDescription&#34;,
+<span class="ln"> 3</span>		&#34;Make&#34;,
+<span class="ln"> 4</span>		&#34;Model&#34;,
+<span class="ln"> 5</span>		&#34;Software&#34;,
+<span class="ln"> 6</span>		&#34;DateTime&#34;,
+<span class="ln"> 7</span>		&#34;Artist&#34;,
+<span class="ln"> 8</span>		&#34;Copyright&#34;,
+<span class="ln"> 9</span>		&#34;ExposureTime&#34;,
+<span class="ln">10</span>		&#34;FNumber&#34;,
+<span class="ln">11</span>		&#34;ISOSpeedRatings&#34;,
+<span class="ln">12</span>		&#34;DateTimeOriginal&#34;,
+<span class="ln">13</span>		&#34;DateTimeDigitized&#34;,
+<span class="ln">14</span>		&#34;FocalLength&#34;,
+<span class="ln">15</span>		&#34;CameraOwnerName&#34;,
+<span class="ln">16</span>		&#34;BodySerialNumber&#34;,
+<span class="ln">17</span>		&#34;LensModel&#34;,
+<span class="ln">18</span>		&#34;GPSLatitudeRef&#34;,
+<span class="ln">19</span>		&#34;GPSLatitude&#34;,
+<span class="ln">20</span>		&#34;GPSLongitudeRef&#34;,
+<span class="ln">21</span>		&#34;GPSLongitude&#34;,
+<span class="ln">22</span>	}
+</code></pre></div><p>The folder scanned it really simple, nothing more than a simple JPG scanner. ( yeah hardcoded JPG only, it was my first Go project! )</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>err := filepath.Walk(filepathArg, func(path string, info os.FileInfo, err error) error {
+<span class="ln">2</span>		if filepath.Ext(path) == &#34;.jpg&#34; || filepath.Ext(path) == &#34;.JPG&#34; {
+<span class="ln">3</span>			files = append(files, path)
+<span class="ln">4</span>		}
+<span class="ln">5</span>		return nil
+<span class="ln">6</span>	})
+</code></pre></div><p>One thing that I did have problems with was how the raw EXIF data is stored from some attributes, the two problematic ones were <strong>Exposuretime</strong> and <strong>Aperture</strong> setting sometimes called the F-number, often expressed as <strong>f/16</strong> for example.</p>
+<h4 id="exposure">Exposure</h4>
+<p>Exposure is stored in EXIF as an expression of a fraction of a second. Sub-second that is something like 1/128, which is 1/128th of a second. That's easy enough.  However anything longer than a second, long exposure images can be minutes, is stored as fraction 60/1, which is obviously 60 seconds. So that needed to be split and converted to decimal then have &quot;sec&quot; appended. Simple enough with a couple of floats.</p>
+<h4 id="aperature">Aperature</h4>
+<p>Aperature is expressed as a ratio of the the focal length and width of the aperture, so f/8 or f/16. There is no actual value on a lens of f/8 or f/16, they are simply ratios of the relationship between the settings of where the lens has been set and the aperture. Once again, we take the value from the EXIF and convert it from fractional to decimal then append &quot;f/&quot; to the result so that it makes sense when shown in the CSV.</p>
+<h4 id="go-exif-library">Go-Exif Library</h4>
+<p>The core function of the Go-Exif library is to be presented with an image file, it then extracts all the EXIF data a JSON based struct. We then cycle the info brought back from the image file in the struct and pull the EXIF field we actually asked for, converting those mentioned where required for the CSV output. The real magic is that the Go-Exif library is able to extract the data into a really easy to use data format where the fields are just sets of tagged data.</p>
+<h2 id="is-it-worth-the-effort">Is it Worth The Effort?</h2>
+<p>All I can say is that when FotoVue books are put together gathering the EXIF data and extracting it can take one person around a week to get all the info if they spend every day copy and pasting the info from Lightroom into Excel! That's a week of click and image, copy 8-10 pieces of text per image from Lightroom into row in Excel, then repeat around 1,000 times!! No fecking way! I didn't spend 30 years of my life in IT for nothing!</p>
+<p>I use Lightroom along with Jeffrey Friedl's superb &quot;Collection Publisher&quot; plugin for Lightroom to extract and dump all the images in the correct folder structure on disk to match the collections from within Lightroom. Then I run my scanner over it and I can have a 1,000 JPG file's worth of data into a CSV in less than 2 mins! 2 mins versus 60 hours of manual copy'n'paste, f**k yeah it's worth it!</p>
+<p>If the EXIF data is wrong or not quite right, then I don't have to spend hours and hours fixing a spreadsheet, I simply fix the odd entries, re-dump the images I need and then re-run the util, all of which can be done in a few minutes. This means the data can be off to the book editor and layout artists same day, it's easier to fix if there's problems so the turnaround is infinitely faster and it means me, the editor and layout artist have much more time to do the creative stuff we enjoy. All thanks to Go and a will to automate.</p>
+<p>Links:</p>
+<ul>
+<li><a href="https://github.com/SyxAxis/GOEXIFExtractor">My GOExifExtractor on Github</a></li>
+<li><a href="https://github.com/dsoprea/go-exif">DSOpera go-exif library</a></li>
+<li><a href="http://regex.info/blog/lightroom-goodies">Jeffrey Friedl Lightroom Plugins</a></li>
+</ul>
+    
       
-        <div>
-          <p class="pale">
-            
-              <p><strong>Using Go to extract EXIF data from Image files</strong></p>
-<p>Extracting EXIF from a single file is easy but suppose you have a huge folder tree with hundreds or thousands of images, what then? Then suppose you have a publishing deadline for a book. What you need is a super fast, efficient language to do the job for you. Golang is …</p>
-            
-          </p>
-          <a href="https://SyxAxis.github.io/post/02_golang_exif_scanner/" class="excerpt_more button">Read More</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-    <li>
-
-
-    </li>
-  </ul>
+    
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     
@@ -186,9 +252,6 @@
         <a href="https://SyxAxis.github.io/post/04_powershell_find_all_filenames_with_non_ascii/" class="nav-link">Powershell - Find All File and Folder Names with Non-ASCII Characters</a>
       </li>
       <li>
-        <a href="https://SyxAxis.github.io/post/02_golang_exif_scanner/" class="nav-link">Go - EXIF Scanner and Extractor</a>
-      </li>
-      <li>
         <a href="https://SyxAxis.github.io/post/01_arduino_bootloader/" class="nav-link">Flashing Arduino Nano Bootloader from Arduino Uno</a>
       </li>
     </ul>
@@ -196,9 +259,6 @@
     <ul class="flex-column">
       <li>
         <a href="https://SyxAxis.github.io/post/04_powershell_find_all_filenames_with_non_ascii/" class="nav-link">Powershell - Find All File and Folder Names with Non-ASCII Characters</a>
-      </li>
-      <li>
-        <a href="https://SyxAxis.github.io/post/02_golang_exif_scanner/" class="nav-link">Go - EXIF Scanner and Extractor</a>
       </li>
       <li>
         <a href="https://SyxAxis.github.io/post/01_arduino_bootloader/" class="nav-link">Flashing Arduino Nano Bootloader from Arduino Uno</a>
@@ -285,8 +345,6 @@
 </aside>
 
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>

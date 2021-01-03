@@ -4,7 +4,42 @@
   
   <url>
     <loc>https://SyxAxis.github.io/</loc>
-    <lastmod>2021-01-02T16:05:26+00:00</lastmod>
+    <lastmod>2021-01-03T13:18:28+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://SyxAxis.github.io/categories/</loc>
+    <lastmod>2021-01-03T13:18:28+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://SyxAxis.github.io/post/</loc>
+    <lastmod>2021-01-03T13:18:28+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://SyxAxis.github.io/categories/powershell/</loc>
+    <lastmod>2021-01-03T13:18:28+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://SyxAxis.github.io/tags/powershell/</loc>
+    <lastmod>2021-01-03T13:18:28+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://SyxAxis.github.io/post/04_powershell_find_all_filenames_with_non_ascii/</loc>
+    <lastmod>2021-01-03T13:18:28+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://SyxAxis.github.io/tags/</loc>
+    <lastmod>2021-01-03T13:18:28+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://SyxAxis.github.io/tags/windows/</loc>
+    <lastmod>2021-01-03T13:18:28+00:00</lastmod>
   </url>
   
   <url>
@@ -14,11 +49,6 @@
   
   <url>
     <loc>https://SyxAxis.github.io/tags/automation/</loc>
-    <lastmod>2021-01-02T16:05:26+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://SyxAxis.github.io/categories/</loc>
     <lastmod>2021-01-02T16:05:26+00:00</lastmod>
   </url>
   
@@ -33,7 +63,7 @@
   </url>
   
   <url>
-    <loc>https://SyxAxis.github.io/post/golang_exif_scanner/</loc>
+    <loc>https://SyxAxis.github.io/post/02_golang_exif_scanner/</loc>
     <lastmod>2021-01-02T16:05:26+00:00</lastmod>
   </url>
   
@@ -48,17 +78,12 @@
   </url>
   
   <url>
-    <loc>https://SyxAxis.github.io/post/</loc>
-    <lastmod>2021-01-02T16:05:26+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://SyxAxis.github.io/tags/</loc>
-    <lastmod>2021-01-02T16:05:26+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://SyxAxis.github.io/tags/arduino/</loc>
+    <lastmod>2021-01-02T15:00:20+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://SyxAxis.github.io/categories/electronics/</loc>
     <lastmod>2021-01-02T15:00:20+00:00</lastmod>
   </url>
   
@@ -68,12 +93,7 @@
   </url>
   
   <url>
-    <loc>https://SyxAxis.github.io/post/arduino_bootloader/</loc>
-    <lastmod>2021-01-02T15:00:20+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://SyxAxis.github.io/categories/technology/</loc>
+    <loc>https://SyxAxis.github.io/post/01_arduino_bootloader/</loc>
     <lastmod>2021-01-02T15:00:20+00:00</lastmod>
   </url>
   
