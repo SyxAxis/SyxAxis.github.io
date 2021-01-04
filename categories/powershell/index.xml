@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 03 Jan 2021 13:18:28 +0000</lastBuildDate><atom:link href="https://SyxAxis.github.io/categories/powershell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Powershell - Find All File and Folder Names with Non-ASCII Characters</title>
-      <link>https://SyxAxis.github.io/post/04_powershell_find_all_filenames_with_non_ascii/</link>
+      <link>https://SyxAxis.github.io/post/03_powershell_find_all_filenames_with_non_ascii/</link>
       <pubDate>Sun, 03 Jan 2021 13:18:28 +0000</pubDate>
       
-      <guid>https://SyxAxis.github.io/post/04_powershell_find_all_filenames_with_non_ascii/</guid>
+      <guid>https://SyxAxis.github.io/post/03_powershell_find_all_filenames_with_non_ascii/</guid>
       <description>
         
           &lt;p&gt;&lt;strong&gt;Despite us being a UTF-8 world file and folder names with non-latin chars can still trip processes up.&lt;/strong&gt;&lt;/p&gt;
